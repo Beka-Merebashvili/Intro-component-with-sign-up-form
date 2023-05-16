@@ -4,6 +4,8 @@ import errorImg from "../assets/icon-error.svg";
 export default function Form() {
   const [username , setUsername] = useState("") ;
   const [emptyUsername , setEmptyUsername] = useState(false); 
+  const firstNameRegex = /^[A-Za-z]+$/;
+
 
   const [lastname , setLastname] = useState("") ;
   const [emptyLastname , setEmptyLastname] = useState(false);
@@ -33,8 +35,10 @@ export default function Form() {
       </div>
       <form style={styles.form}>
         <div style={styles.inputParent}>
-          <input style={emptyUsername || lessThen4  ? {...styles.input , ...styles.inputerror} : styles.input} type="text" placeholder="First Name" onChange={(event) => {
-            setUsername(event.target.value) ;
+          <input style={emptyUsername || lessThen4  ? {...styles.input , ...styles.inputerror} : styles.input} type="text" placeholder="First Name" value={username} onChange={(event) => {
+            if (firstNameRegex.test(event.target.value)|| event.target.value == "") {
+              setUsername(event.target.value) ;
+            }
           }}/>
           {emptyUsername && <p style={styles.errorText}>First Name cannot be empty</p>}
           {lessThen4 && <p style={styles.errorText}>First Name must contain at least 4 characters</p>}
@@ -42,8 +46,10 @@ export default function Form() {
         </div>
 
         <div style={styles.inputParent}> 
-          <input style={emptyLastname  || lessThen4Lastname ?{...styles.input , ...styles.inputerror} : styles.input} type="text" placeholder="Last Name" onChange={(event) => {
-            setLastname(event.target.value);
+          <input style={emptyLastname  || lessThen4Lastname ?{...styles.input , ...styles.inputerror} : styles.input} type="text" placeholder="Last Name" value={lastname} onChange={(event) => {
+            if (firstNameRegex.test(event.target.value)|| event.target.value == "") {
+              setLastname(event.target.value) ;
+            }
           }} />
            {emptyLastname && <p style={styles.errorText}>Last Name cannot be empty</p>}
            {lessThen4Lastname && <p style={styles.errorText}>Last Name must contain at least 4 characters</p>}
@@ -70,7 +76,6 @@ export default function Form() {
         </div>
 
         <button style={styles.button} onClick={(event) => {
-          event.preventDefault();
           if(username == "") {
             setEmptyUsername(true) ;
           }
@@ -115,8 +120,9 @@ export default function Form() {
           else {
             setLessThen4Password(false) ;
           }
-
-
+          if(username == "" || lastname == "" || !emailRegex.test(email) || paswword == "" ||(username.length > 0 && username.length < 4) || (lastname.length > 0 && lastname.length < 4) || (paswword.length > 0 && paswword.length < 6) ) {
+            event.preventDefault();
+          }
         }}>CLAIM YOUR FREE TRIAL</button>
         <p style={styles.conditions}>
           By clicking the button, you are agreeing to our{" "}
