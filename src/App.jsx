@@ -1,43 +1,29 @@
-import { useState } from "react";
-import bgImige from "./assets/bg-intro-mobile.png";
-import bgDesktopImg from "./assets/bg-intro-desktop.png" ;
-import "./App.css";
 import Heading from "./components/Heading";
 import Form from "./components/Form";
+import styled from "styled-components";
+import Globalstyles from "./styled-components/GlobalStyles";
 
 function App() {
   return (
-    <div style={styles.flex}>
+    <StyledDviV>
+      <Globalstyles />
       <Heading />
       <Form />
-    </div>
+    </StyledDviV>
   );
 }
 
 export default App;
 
-const styles = {
-   
-  flex : {
-    display : "flex" ,
-    flexDirection : "column" ,
-    alignItems: "center" ,
-    backgroundImage: `url(${bgImige})`,
-    backgroundSize : "cover" ,
-    backgroundColor: "#FF7979",
-    paddingTop: 88 ,
-  }
-};
+const StyledDviV = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 88px;
 
-if (window.innerWidth >= 1440) {
-  styles.flex = {
-    height : "100vh" ,
-    display : "flex" ,
-    flexDirection: "row",
-    justifyContent : "center" ,
-    backgroundImage: `url(${bgDesktopImg})`,
-    backgroundSize : "cover" ,
-    backgroundColor: "#FF7979",
-    paddingTop: "77px" ,
+  @media only screen and (min-width: 1440px) {
+    flex-direction: row;
+    justify-content: center;
+    padding-top: 77px;
   }
-}
+`;

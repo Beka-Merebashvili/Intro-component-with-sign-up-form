@@ -1,5 +1,7 @@
 import { useState } from "react";
 import errorImg from "../assets/icon-error.svg";
+import styled from "styled-components";
+import {FormContainer } from "../styled-components/Container.styled" ;
 
 export default function Form() {
   const [username , setUsername] = useState("") ;
@@ -23,54 +25,52 @@ export default function Form() {
    const[lessThen4Lastname, setLessThen4Lastname] = useState(false);
    const[lessThen4Password, setLessThen4Password] = useState(false);
 
-// console.log(emptyPassword);
 
   return (
-    <div style={styles.flex}>
-      <div style={styles.price}>
-        <p style={styles.text}>
-          <span style={styles.span}>Try it free 7 days</span> then $20/mo.
+    <FormContainer>
+      <div className="price">
+        <p className="priceText">
+          <span  >Try it free 7 days</span> then $20/mo.
           thereafter
         </p>
       </div>
-      <form style={styles.form}>
-        <div style={styles.inputParent}>
-          <input style={emptyUsername || lessThen4  ? {...styles.input , ...styles.inputerror} : styles.input} type="text" placeholder="First Name" value={username} onChange={(event) => {
+      <StyledForm username={username} emptyUsername={emptyUsername} lastname={lastname} emptyLastname={emptyLastname} email={email} emailInvaild={emailInvaild} paswword={paswword} emptyPassword={emptyPassword} lessThen4={lessThen4} lessThen4Lastname={lessThen4Lastname} lessThen4Password={lessThen4Password}>
+        <div className="inputContainer">
+          <input className="usernameInput" type="text" placeholder="First Name" value={username} onChange={(event) => {
             if (firstNameRegex.test(event.target.value)|| event.target.value == "") {
               setUsername(event.target.value) ;
             }
           }}/>
-          {emptyUsername && <p style={styles.errorText}>First Name cannot be empty</p>}
-          {lessThen4 && <p style={styles.errorText}>First Name must contain at least 4 characters</p>}
+          {emptyUsername && <p className="errorText">First Name cannot be empty</p>}
+          {lessThen4 && <p className="errorText">First Name must contain at least 4 characters</p>}
          { <img  style={emptyUsername || lessThen4 ? {...styles.errorIcon} : styles.none}  src={errorImg}  />}
         </div>
 
-        <div style={styles.inputParent}> 
-          <input style={emptyLastname  || lessThen4Lastname ?{...styles.input , ...styles.inputerror} : styles.input} type="text" placeholder="Last Name" value={lastname} onChange={(event) => {
+        <div className="inputContainer"> 
+          <input className="lastnameInput" type="text" placeholder="Last Name" value={lastname} onChange={(event) => {
             if (firstNameRegex.test(event.target.value)|| event.target.value == "") {
               setLastname(event.target.value) ;
             }
           }} />
-           {emptyLastname && <p style={styles.errorText}>Last Name cannot be empty</p>}
-           {lessThen4Lastname && <p style={styles.errorText}>Last Name must contain at least 4 characters</p>}
+           {emptyLastname && <p className="errorText">Last Name cannot be empty</p>}
+           {lessThen4Lastname && <p className="errorText">Last Name must contain at least 4 characters</p>}
            { <img  style={emptyLastname || lessThen4Lastname ? {...styles.errorIcon} : styles.none}  src={errorImg}  />}
         </div>
 
-        <div style={styles.inputParent}>
-          <input style={emailInvaild ? {...styles.input , ...styles.inputerror} : styles.input} type="text" placeholder="Email Address" onChange={(event) => {
+        <div className="inputContainer">
+          <input className="emailInput" type="text" placeholder="Email Address" onChange={(event) => {
             setEmail(event.target.value);
           }}/>
-           {emailInvaild && <p style={styles.errorText}>Looks like this is not an email</p>}
+           {emailInvaild && <p className="errorText">Looks like this is not an email</p>}
          {emailInvaild && <img style={styles.errorIcon} src={errorImg} />}
         </div>
 
-
-        <div style={styles.inputParent}>
-          <input style={emptyPassword || lessThen4Password ? {...styles.input , ...styles.inputerror} : styles.input} type="password" placeholder="Password" onChange={(event) => {
+        <div className="inputContainer">
+          <input className="passwordInput" type="password" placeholder="Password" onChange={(event) => {
             setPassword(event.target.value);
           }}/>
-           {emptyPassword && <p style={styles.errorText}>Password cannot be empty</p>}
-           {lessThen4Password && <p style={styles.errorText}>
+           {emptyPassword && <p className="errorText">Password cannot be empty</p>}
+           {lessThen4Password && <p className="errorText">
             Password must contain at least 6 characters</p>}
            { <img  style={emptyPassword || lessThen4Password ? {...styles.errorIcon} : styles.none}  src={errorImg}  />}
         </div>
@@ -128,79 +128,140 @@ export default function Form() {
           By clicking the button, you are agreeing to our{" "}
           <span style={styles.span2}>Terms and Services</span>
         </p>
-      </form>
-    </div>
+        </StyledForm>
+      </FormContainer>
   );
 }
 
+
+
+const StyledForm = styled.form`
+width: 328px;
+height: 442px;
+background: #ffffff;
+box-shadow: 0px 8px 0px rgba(0, 0, 0, 0.14688) ;
+border-radius: 10px;
+margin-bottom: 68px;
+padding-top: 24px;
+display: flex;
+flex-direction: column;
+align-items: center;
+gap: 18px;
+.inputContainer {
+  position: relative;
+}
+input {
+  width: 280px ;
+    height: 56px ;
+    padding-left: 20px;
+    outline: none ;
+    font-size: 14px ;
+    font-weight: 600 ;
+    color: #3D3B48 ;
+    letter-spacing: 0.25px ;
+    &::placeholder{
+      opacity: 0.75;
+    }
+}
+.usernameInput {
+      border: ${(props) => (props.username || props.emptyUsername || props.lessThen4) ? "2px solid #FF7979" : '1px solid #DEDEDE'};
+    }
+ .lastnameInput {
+  border: ${(props) => (props.lastname || props.emptyLastname || props.lessThen4Lastname) ? "2px solid #FF7979" : '1px solid #DEDEDE'};
+ }
+ .emailInput {
+  border: ${(props) => props.emailInvaild   ? "2px solid #FF7979" : '1px solid #DEDEDE'};
+ }
+ .passwordInput {
+  border: ${(props) => (props.paswword || props.emptyPassword || props.lessThen4Password) ? "2px solid #FF7979" : '1px solid #DEDEDE'};
+ }
+ .errorText {
+  font-size : 11px ;
+    font-weight : 500 ;
+    font-style : italic ;
+    color: #FF7979;
+    position : absolute ;
+    bottom : -13px ;
+    right : 0;
+ }
+ .errorIcon {
+  position : absolute ;
+    top : 14px ;
+    right : 16px ;
+ }
+ .none {
+  display: none;
+ }
+`
+
 const styles = {
-  flex: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    marginTop: "64px",
-  },
-  price: {
-    background: "#5E54A4",
-    width: "328px",
-    height: "88px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    boxShadow: " 0px 8px 0px rgba(0, 0, 0, 0.14688)",
-    borderRadius: "10px",
-    marginBottom: "24px",
-  },
-  text: {
-    fontSize: "15px",
-    fontWeight: "500px",
-    lineHeight: "26px",
-    width: "194px",
-    color: "#FFFFFF",
-    textAlign: "center",
-  },
-  span: {
-    fontWeight: "700",
-  },
-  form: {
-    width: "328px",
-    height: "442px",
-    background: "#FFFFFF",
-    boxShadow: "0px 8px 0px rgba(0, 0, 0, 0.14688)",
-    borderRadius: "10px",
-    marginBottom: "68px",
-    paddingTop: "24px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "18px",
-  },
-  inputParent : {
-    position : "relative" ,
-  } ,
-  input: {
-    width: "280px",
-    height: "56px",
-    border: " 1px solid #DEDEDE",
-    paddingLeft: "20px",
-    outline: "none",
-    fontSize: "14px",
-    fontWeight: "600",
-    color: "#3D3B48",
-    letterSpacing: "0.25px",
-  },
-  inputerror : {
-    border: "2px solid #FF7979",
-  } ,
-  errorText : {
-    fontSize : "11px" ,
-    fontWeight : "500" ,
-    fontStyle : "italic" ,
-    color: "#FF7979",
-    position : "absolute" ,
-    bottom : "-13px" ,
-    right : "0" ,
-  } ,
+  // flex: {
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   alignItems: "center",
+  //   marginTop: "64px",
+  // },
+  // price: {
+  //   background: "#5E54A4",
+  //   width: "328px",
+  //   height: "88px",
+  //   display: "flex",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   boxShadow: " 0px 8px 0px rgba(0, 0, 0, 0.14688)",
+  //   borderRadius: "10px",
+  //   marginBottom: "24px",
+  // },
+  // text: {
+  //   fontSize: "15px",
+  //   fontWeight: "500px",
+  //   lineHeight: "26px",
+  //   width: "194px",
+  //   color: "#FFFFFF",
+  //   textAlign: "center",
+  // },
+  // span: {
+  //   fontWeight: "700",
+  // },
+  // form: {
+  //   width: "328px",
+  //   height: "442px",
+  //   background: "#FFFFFF",
+  //   boxShadow: "0px 8px 0px rgba(0, 0, 0, 0.14688)",
+  //   borderRadius: "10px",
+  //   marginBottom: "68px",
+  //   paddingTop: "24px",
+  //   display: "flex",
+  //   flexDirection: "column",
+  //   alignItems: "center",
+  //   gap: "18px",
+  // },
+  // inputParent : {
+  //   position : "relative" ,
+  // } ,
+  // input: {
+  //   width: "280px",
+  //   height: "56px",
+  //   border: " 1px solid #DEDEDE",
+  //   paddingLeft: "20px",
+  //   outline: "none",
+  //   fontSize: "14px",
+  //   fontWeight: "600",
+  //   color: "#3D3B48",
+  //   letterSpacing: "0.25px",
+  // },
+  // inputerror : {
+  //   border: "2px solid #FF7979",
+  // } ,
+  // errorText : {
+  //   fontSize : "11px" ,
+  //   fontWeight : "500" ,
+  //   fontStyle : "italic" ,
+  //   color: "#FF7979",
+  //   position : "absolute" ,
+  //   bottom : "-13px" ,
+  //   right : "0" ,
+  // } ,
   errorIcon : {
     position : "absolute" ,
     top : "14px" ,
