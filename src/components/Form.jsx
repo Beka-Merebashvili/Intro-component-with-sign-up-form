@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {FormContainer } from "../styled-components/Container.styled" ;
 
 export default function Form() {
-  const [username , setUsername] = useState("") ;
+  const [username , setUsername] = useState() ;
   const [emptyUsername , setEmptyUsername] = useState(false); 
   const firstNameRegex = /^[A-Za-z]+$/;
 
@@ -24,6 +24,10 @@ export default function Form() {
 
    const[lessThen4Lastname, setLessThen4Lastname] = useState(false);
    const[lessThen4Password, setLessThen4Password] = useState(false);
+
+   console.log(username );
+   console.log(emptyUsername);
+   console.log(lessThen4);
 
 
   return (
@@ -164,16 +168,16 @@ input {
     }
 }
 .usernameInput {
-      border: ${(props) => (props.username || props.emptyUsername || props.lessThen4) ? "2px solid #FF7979" : "1px solid #DEDEDE"};
+      border: ${(props) => (props.emptyUsername || props.lessThen4) ? "2px solid #FF7979" : "1px solid #DEDEDE"};
     }
  .lastnameInput {
-  border: ${(props) => (props.lastname || props.emptyLastname || props.lessThen4Lastname) ? "2px solid #FF7979" : "1px solid #DEDEDE"};
+  border: ${(props) => ( props.emptyLastname || props.lessThen4Lastname) ? "2px solid #FF7979" : "1px solid #DEDEDE"};
  }
  .emailInput {
   border: ${(props) => props.emailInvaild   ? "2px solid #FF7979" : "1px solid #DEDEDE"};
  }
  .passwordInput {
-  border: ${(props) => (props.paswword || props.emptyPassword || props.lessThen4Password) ? "2px solid #FF7979" : "1px solid #DEDEDE"};
+  border: ${(props) => (props.emptyPassword || props.lessThen4Password) ? "2px solid #FF7979" : "1px solid #DEDEDE"};
  }
  .errorText {
   font-size : 11px ;
