@@ -22,10 +22,10 @@ h1 {
     margin-top: 16px;
 }
 
+/* styles for desktop */
 
 @media only screen and (min-width: 1440px) {
     align-items: start;
-    margin-top: 180px;
     margin-right: 45px;
 h1 {
     font-size: 50px;
@@ -63,6 +63,18 @@ margin-top: 64px;
 }
 span {
     font-weight: 700;
+}
+
+/* styles for desktop */
+
+@media only screen and (min-width: 1440px) {
+    .price {
+        width: 540px;
+        height: 60px;
+    }
+    .priceText {
+        width: 316px;
+    }
 }
 `
 

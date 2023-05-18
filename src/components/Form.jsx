@@ -43,7 +43,7 @@ export default function Form() {
           }}/>
           {emptyUsername && <p className="errorText">First Name cannot be empty</p>}
           {lessThen4 && <p className="errorText">First Name must contain at least 4 characters</p>}
-         { <img  style={emptyUsername || lessThen4 ? {...styles.errorIcon} : styles.none}  src={errorImg}  />}
+         {<img  className={emptyUsername || lessThen4 ? "errorIcon" : 'none'}  src={errorImg}  />}
         </div>
 
         <div className="inputContainer"> 
@@ -54,7 +54,7 @@ export default function Form() {
           }} />
            {emptyLastname && <p className="errorText">Last Name cannot be empty</p>}
            {lessThen4Lastname && <p className="errorText">Last Name must contain at least 4 characters</p>}
-           { <img  style={emptyLastname || lessThen4Lastname ? {...styles.errorIcon} : styles.none}  src={errorImg}  />}
+           { <img  className={emptyLastname || lessThen4Lastname ? "errorIcon" : 'none'}  src={errorImg}  />}
         </div>
 
         <div className="inputContainer">
@@ -62,7 +62,7 @@ export default function Form() {
             setEmail(event.target.value);
           }}/>
            {emailInvaild && <p className="errorText">Looks like this is not an email</p>}
-         {emailInvaild && <img style={styles.errorIcon} src={errorImg} />}
+         {emailInvaild && <img className="errorIcon" src={errorImg} />}
         </div>
 
         <div className="inputContainer">
@@ -72,10 +72,10 @@ export default function Form() {
            {emptyPassword && <p className="errorText">Password cannot be empty</p>}
            {lessThen4Password && <p className="errorText">
             Password must contain at least 6 characters</p>}
-           { <img  style={emptyPassword || lessThen4Password ? {...styles.errorIcon} : styles.none}  src={errorImg}  />}
+           { <img  className={emptyPassword || lessThen4Password ? "errorIcon" : 'none'}  src={errorImg}  />}
         </div>
 
-        <button style={styles.button} onClick={(event) => {
+        <button  onClick={(event) => {
           if(username == "") {
             setEmptyUsername(true) ;
           }
@@ -124,9 +124,9 @@ export default function Form() {
             event.preventDefault();
           }
         }}>CLAIM YOUR FREE TRIAL</button>
-        <p style={styles.conditions}>
+        <p className="conditions">
           By clicking the button, you are agreeing to our{" "}
-          <span style={styles.span2}>Terms and Services</span>
+          <span>Terms and Services</span>
         </p>
         </StyledForm>
       </FormContainer>
@@ -164,16 +164,16 @@ input {
     }
 }
 .usernameInput {
-      border: ${(props) => (props.username || props.emptyUsername || props.lessThen4) ? "2px solid #FF7979" : '1px solid #DEDEDE'};
+      border: ${(props) => (props.username || props.emptyUsername || props.lessThen4) ? "2px solid #FF7979" : "1px solid #DEDEDE"};
     }
  .lastnameInput {
-  border: ${(props) => (props.lastname || props.emptyLastname || props.lessThen4Lastname) ? "2px solid #FF7979" : '1px solid #DEDEDE'};
+  border: ${(props) => (props.lastname || props.emptyLastname || props.lessThen4Lastname) ? "2px solid #FF7979" : "1px solid #DEDEDE"};
  }
  .emailInput {
-  border: ${(props) => props.emailInvaild   ? "2px solid #FF7979" : '1px solid #DEDEDE'};
+  border: ${(props) => props.emailInvaild   ? "2px solid #FF7979" : "1px solid #DEDEDE"};
  }
  .passwordInput {
-  border: ${(props) => (props.paswword || props.emptyPassword || props.lessThen4Password) ? "2px solid #FF7979" : '1px solid #DEDEDE'};
+  border: ${(props) => (props.paswword || props.emptyPassword || props.lessThen4Password) ? "2px solid #FF7979" : "1px solid #DEDEDE"};
  }
  .errorText {
   font-size : 11px ;
@@ -192,184 +192,49 @@ input {
  .none {
   display: none;
  }
+ button {
+    width: 280px;
+    height:56px;
+    background: #38CC8B ;
+    font-size: 15px ;
+    font-weight: 600;
+    color: #FFFFFF ;
+    box-shadow: inset 0px -4px 0px rgba(0, 0, 0, 0.0908818) ;
+    border-radius: 5px ;
+    border: none;
+    letter-spacing: 1px ;
+ }
+ .conditions {
+    font-size: 11px ;
+    line-height: 21px;
+    font-weight: 500;
+    color: #BAB7D4 ;
+    width: 220px ;
+    text-align: center ;
+  }
+  .conditions span {
+    font-weight: 700 ;
+    color: #ff7979 ;
+  }
+
+  /* styles for desktop */
+
+  @media only screen and (min-width: 1440px) {
+    width: 540px ;
+    height: 474px ;
+    padding-top: 40px ;
+    gap: 20px ;
+  input {
+    width: 460px ;
+    height: 56px ;
+  }
+  button {
+    width: 460px ;
+  }
+  .conditions {
+    width: 368px ;
+  }
+}
 `
 
-const styles = {
-  // flex: {
-  //   display: "flex",
-  //   flexDirection: "column",
-  //   alignItems: "center",
-  //   marginTop: "64px",
-  // },
-  // price: {
-  //   background: "#5E54A4",
-  //   width: "328px",
-  //   height: "88px",
-  //   display: "flex",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   boxShadow: " 0px 8px 0px rgba(0, 0, 0, 0.14688)",
-  //   borderRadius: "10px",
-  //   marginBottom: "24px",
-  // },
-  // text: {
-  //   fontSize: "15px",
-  //   fontWeight: "500px",
-  //   lineHeight: "26px",
-  //   width: "194px",
-  //   color: "#FFFFFF",
-  //   textAlign: "center",
-  // },
-  // span: {
-  //   fontWeight: "700",
-  // },
-  // form: {
-  //   width: "328px",
-  //   height: "442px",
-  //   background: "#FFFFFF",
-  //   boxShadow: "0px 8px 0px rgba(0, 0, 0, 0.14688)",
-  //   borderRadius: "10px",
-  //   marginBottom: "68px",
-  //   paddingTop: "24px",
-  //   display: "flex",
-  //   flexDirection: "column",
-  //   alignItems: "center",
-  //   gap: "18px",
-  // },
-  // inputParent : {
-  //   position : "relative" ,
-  // } ,
-  // input: {
-  //   width: "280px",
-  //   height: "56px",
-  //   border: " 1px solid #DEDEDE",
-  //   paddingLeft: "20px",
-  //   outline: "none",
-  //   fontSize: "14px",
-  //   fontWeight: "600",
-  //   color: "#3D3B48",
-  //   letterSpacing: "0.25px",
-  // },
-  // inputerror : {
-  //   border: "2px solid #FF7979",
-  // } ,
-  // errorText : {
-  //   fontSize : "11px" ,
-  //   fontWeight : "500" ,
-  //   fontStyle : "italic" ,
-  //   color: "#FF7979",
-  //   position : "absolute" ,
-  //   bottom : "-13px" ,
-  //   right : "0" ,
-  // } ,
-  errorIcon : {
-    position : "absolute" ,
-    top : "14px" ,
-    right : " 16px"
-  } ,
-  none : {
-    display : "none" ,
-  } ,
-  button: {
-    width: "280px",
-    height: "56px",
-    background: "#38CC8B",
-    fontSize: "15px",
-    fontWeight: "600",
-    color: "#FFFFFF",
-    boxShadow: "inset 0px -4px 0px rgba(0, 0, 0, 0.0908818)",
-    borderRadius: "5px",
-    border: "none",
-    letterSpacing: "1px",
-  },
-  conditions: {
-    fontSize: "11px",
-    lineHeight: "21px",
-    fontWeight: "500",
-    color: "#BAB7D4",
-    width: "220px",
-    textAlign: "center",
-  },
-  span2: {
-    fontWeight: "700",
-    color: "#ff7979",
-  },
-};
-
-
-if (window.innerWidth >= 1440) {
-  styles.flex = {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-  } ,
-  styles.price = {
-    background: "#5E54A4",
-    width: "540px",
-    height: "60px",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    boxShadow: " 0px 8px 0px rgba(0, 0, 0, 0.14688)",
-    borderRadius: "10px",
-    marginBottom: "24px",
-  }
-  styles.text = {
-    fontSize: "15px",
-    fontWeight: "500px",
-    lineHeight: "26px",
-    width: "316px",
-    color: "#FFFFFF",
-    textAlign: "center",
-  }
-  styles.form = {
-    width: "540px",
-    height: "474px",
-    background: "#FFFFFF",
-    boxShadow: "0px 8px 0px rgba(0, 0, 0, 0.14688)",
-    borderRadius: "10px",
-    marginBottom: "68px",
-    paddingTop: "40px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    gap: "20px",
-  }
-  styles.input ={
-    width: "460px",
-    height: "56px",
-    border: " 1px solid #DEDEDE",
-    paddingLeft: "20px",
-    outline: "none",
-    fontSize: "14px",
-    fontWeight: "600",
-    color: "#3D3B48",
-    letterSpacing: "0.25px",
-  }
-  styles.button ={
-    width: "460px",
-    height: "56px",
-    background: "#38CC8B",
-    fontSize: "15px",
-    fontWeight: "600",
-    color: "#FFFFFF",
-    boxShadow: "inset 0px -4px 0px rgba(0, 0, 0, 0.0908818)",
-    borderRadius: "5px",
-    border: "none",
-    letterSpacing: "1px",
-  //   transition: "background 0.3s ease-in-out",  
-  //  ":hover": {
-  //   cursor : "pointer" ,
-  //   backgroundColor: "red", }
-  }
-  styles.conditions ={
-    fontSize: "11px",
-    lineHeight: "21px",
-    fontWeight: "500",
-    color: "#BAB7D4",
-    width: "368px",
-    textAlign: "center",
-  }
-
-}
 
