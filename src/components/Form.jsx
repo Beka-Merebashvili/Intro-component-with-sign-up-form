@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {FormContainer } from "../styled-components/Container.styled" ;
 
 export default function Form() {
-  const [username , setUsername] = useState() ;
+  const [username , setUsername] = useState("") ;
   const [emptyUsername , setEmptyUsername] = useState(false); 
   const firstNameRegex = /^[A-Za-z]+$/;
 
