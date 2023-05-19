@@ -291,11 +291,6 @@ const StyledForm = styled.form`
     border: none;
     letter-spacing: 1px;
   }
-  button:hover {
-    cursor: pointer;
-    background: #77e2b3;
-    transition: 0.3s;
-  }
   .conditions {
     font-size: 11px;
     line-height: 21px;
@@ -323,6 +318,11 @@ const StyledForm = styled.form`
     button {
       width: 460px;
     }
+    button:hover {
+    cursor: pointer;
+    background: #77e2b3;
+    transition: 0.3s;
+  }
     .conditions {
       width: 368px;
     }
